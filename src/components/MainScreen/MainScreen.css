@@ -1,0 +1,13 @@
+.main-screen{
+    width: 75%;
+    height: 90vh;
+    background: #3c4043;
+}
+
+.wrapper{
+    width: 100%;
+}
+
+.footer{
+    height: 10vh;
+}
