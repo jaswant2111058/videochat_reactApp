@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './otpveri.css'
 
 const OTP = ({email}) =>{
-    const baseURL = "http://localhost:5000"
+    const baseURL = "https://videocall-ajjm.onrender.com"
     const navigate = useNavigate()
     const [OTP,setOTP] = useState({
         email:email.email,
