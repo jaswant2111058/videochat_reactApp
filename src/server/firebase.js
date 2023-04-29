@@ -11,14 +11,35 @@ export const db = firebase;
 
 var firepadRef = firebase.database().ref();
 
-export const userName = prompt("What's your name?");
+var user = JSON.parse(localStorage.getItem('videoChat'))
+console.log(user)
+  const userState=(index)=>{
+      if(user&&index)
+      {
+        return user.roomId
+      }
+      else if (user&&!index)
+
+      {
+        return user.userName
+      } 
+      else 
+      return 0
+  }
+export const userName = userState(0);
 // login id and password adding
 
 const urlparams = new URLSearchParams(window.location.search);
-const roomId = urlparams.get("id");
-//adding input box for  getting room code
 
+const roomId = userState(1)||urlparams.get("id")
 
+if(user)
+{
+user={
+  userName,roomId
+}
+localStorage.setItem('videoChat',JSON.stringify(user))
+}
 
 
 if (roomId) {

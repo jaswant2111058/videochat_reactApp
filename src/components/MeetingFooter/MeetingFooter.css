@@ -5,7 +5,9 @@
     justify-content: center;
     align-items: center;
 }
-
+.roomid{
+  color: aliceblue;
+}
 .meeting-icons{
     color: white;
     border-radius: 50%;

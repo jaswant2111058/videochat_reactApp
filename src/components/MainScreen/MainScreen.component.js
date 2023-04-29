@@ -4,8 +4,14 @@ import Participants from "../Participants/Participants.component";
 import "./MainScreen.css";
 import { connect } from "react-redux";
 import { setMainStream, updateUser } from "../../store/actioncreator";
+import { useNavigate, Link } from "react-router-dom";
+
+
 
 const MainScreen = (props) => {
+  const navigate = useNavigate()
+  const user =  JSON.parse(localStorage.getItem('videoChat'))
+  if(!user) navigate('/createroom')
   const participantRef = useRef(props.participants);
 
   const onMicClick = (micEnabled) => {

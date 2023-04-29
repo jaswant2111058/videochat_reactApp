@@ -1,7 +1,8 @@
 import MainScreen from "./components/MainScreen/MainScreen.component";
+import { BrowserRouter,HashRouter, Routes, Route} from "react-router-dom";
 import firepadRef, { db, userName } from "./server/firebase";
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   setMainStream,
   addParticipant,
@@ -10,6 +11,13 @@ import {
   updateParticipant,
 } from "./store/actioncreator";
 import { connect } from "react-redux";
+import JoinRoom from "./components/JoinRoom/JoinRoom";
+import CreateRoom from "./components/CreateRoom/CreateRoom"
+import SignUp from "./components/SignUp/SignUp";
+import SignIn from "./components/SignIn/SignIn";
+import OTP from "./components/SignUp/otpVerification"
+
+
 
 function App(props) {
   const getUserStream = async () => {
@@ -37,7 +45,7 @@ function App(props) {
           preferences: defaultPreference,
         });
         props.setUser({
-          [userStatusRef.key]: { name: userName, ...defaultPreference },
+          [userStatusRef.key]: { name: userName,...defaultPreference },
         });
         userStatusRef.onDisconnect().remove();
       }
@@ -76,18 +84,30 @@ function App(props) {
       });
     }
   }, [isStreamSet, isUserSet]);
-
+    const [email,setEmail]=useState()
   return (
-    <div className="App">
+
+    <HashRouter>
+    <Routes>
+      <Route  path ='/' element={<div className="App">
       <MainScreen />
     </div>
+  }/>
+      <Route  path ='/joinroom' element={<JoinRoom />}/>
+      <Route  path ='/createroom' element={<CreateRoom />}/>
+      <Route exact path ="/signup" element={<SignUp setEmail={setEmail} />}/>
+      <Route exact path='/otpverify' element={<OTP email={email}/>}/>
+      <Route exact path ='/signin' element={<SignIn/>}/>
+    </Routes>
+    </HashRouter>
+    
   );
 }
 
 const mapStateToProps = (state) => {
   return {
     stream: state.mainStream,
-    user: state.currentUser,
+    user: state.currentUser, 
   };
 };
 

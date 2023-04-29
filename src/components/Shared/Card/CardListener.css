@@ -1,0 +1,8 @@
+.cardlistener{
+    background: #3c4043;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}

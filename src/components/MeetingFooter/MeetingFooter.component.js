@@ -6,10 +6,19 @@ import {
   faDesktop,
   faVideoSlash,
   faMicrophoneSlash,
+  faCircle,
+  faPhoneSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
+import { useNavigate, Link } from "react-router-dom";
+
+
+
 const MeetingFooter = (props) => {
+  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('videoChat'))
+
   const [streamState, setStreamState] = useState({
     mic: true,
     video: false,
@@ -37,6 +46,11 @@ const MeetingFooter = (props) => {
     props.onScreenClick(setScreenState);
   };
 
+  const onHangupClick = () => {
+   localStorage.removeItem('videoChat')
+   navigate('/createroom')
+  };
+
   const setScreenState = (isEnabled) => {
     setStreamState((currentState) => {
       return {
@@ -52,7 +66,12 @@ const MeetingFooter = (props) => {
     props.onVideoClick(streamState.video);
   }, [streamState.video]);
   return (
+    <>
+    
     <div className="meeting-footer">
+      <div className="roomid">
+      {`Room Id : ${user?user.roomId:''}`}
+      </div>
       <div
         className={"meeting-icons " + (!streamState.mic ? "active" : "")}
         data-tip={streamState.mic ? "Mute Audio" : "Unmute Audio"}
@@ -77,9 +96,21 @@ const MeetingFooter = (props) => {
         disabled={streamState.screen}
       >
         <FontAwesomeIcon icon={faDesktop} />
+        
       </div>
+      <div 
+      className="meeting-icons"
+      data-tip="Leave Meeting"
+      onClick={onHangupClick}
+      
+    >
+      <FontAwesomeIcon icon={faPhoneSlash} />
+      </div>
+      
       <ReactTooltip />
     </div>
+    
+    </>
   );
 };
 

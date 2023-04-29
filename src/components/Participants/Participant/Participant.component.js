@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../Shared/Card/Card.component";
+import CardListener from "../../Shared/Card/CardListener";
 import { faMicrophoneSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Participant.css";
@@ -12,9 +13,14 @@ export const Participant = (props) => {
     videoRef,
     showAvatar,
     currentUser,
+    NotInstructer,
   } = props;
   if (!currentParticipant) return <></>;
+  if(!NotInstructer)
+  {
   return (
+    <>
+    <div className="wrap">
     <div className={`participant ${hideVideo ? "hide" : ""}`}>
       <Card>
         <video
@@ -23,7 +29,9 @@ export const Participant = (props) => {
           id={`participantVideo${curentIndex}`}
           autoPlay
           playsInline
-        ></video>
+        >
+          
+        </video>
         {!currentParticipant.audio && (
           <FontAwesomeIcon
             className="muted"
@@ -39,11 +47,55 @@ export const Participant = (props) => {
             {currentParticipant.name[0]}
           </div>
         )}
-        <div className="name">
+       
+      </Card>
+      <div className="nameWrap">
+      <div className="name">
           {currentParticipant.name}
           {currentUser ? "(You)" : ""}
         </div>
-      </Card>
+        </div>
     </div>
-  );
+    </div>
+    </>
+  )
+        }
+        else{
+          return (
+            <>
+            <div className="listener">
+              <CardListener>
+                <video
+                  ref={videoRef}
+                  className="videoListener"
+                  id={`participantVideo${curentIndex}`}
+                  autoPlay
+                  playsInline
+                ></video>
+                {!currentParticipant.audio && (
+                  <FontAwesomeIcon
+                    className="muted"
+                    icon={faMicrophoneSlash}
+                    title="Muted"
+                  />
+                )}
+                {showAvatar && (
+                  <div
+                    style={{ background: currentParticipant.avatarColor }}
+                    className="avatarListener"
+                  >
+                    {currentParticipant.name[0]}
+                    
+                  </div>
+                  
+                )}
+              </CardListener>
+              <div className="nameListener">
+                  {currentParticipant.name}
+                </div>
+            </div>
+            </>
+          )
+        }
+    
 };

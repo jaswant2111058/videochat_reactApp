@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import { Participant } from "./Participant/Participant.component";
 
 const Participants = (props) => {
+
+  
   const videoRef = useRef(null);
   let participantKey = Object.keys(props.participants);
-  useEffect(() => {
+  useEffect(() =>{
     if (videoRef.current) {
       videoRef.current.srcObject = props.stream;
       videoRef.current.muted = true;
@@ -17,24 +19,25 @@ const Participants = (props) => {
     ? Object.values(props.currentUser)[0]
     : null;
 
-  let gridCol =
-    participantKey.length === 1 ? 1 : participantKey.length <= 4 ? 2 : 4;
-  const gridColSize = participantKey.length <= 4 ? 1 : 2;
-  let gridRowSize =
-    participantKey.length <= 4
-      ? participantKey.length
-      : Math.ceil(participantKey.length / 2);
+  // let gridCol =
+  //   participantKey.length === 1 ? 1 : participantKey.length <= 4 ? 2 : 4;
+  // const gridColSize = participantKey.length <= 4 ? 1 : 2;
+  // let gridRowSize =
+  //   participantKey.length <= 4
+  //     ? participantKey.length
+  //     : Math.ceil(participantKey.length / 2);
 
   const screenPresenter = participantKey.find((element) => {
     const currentParticipant = props.participants[element];
     return currentParticipant.screen;
   });
 
-  if (screenPresenter) {
-    gridCol = 1;
-    gridRowSize = 2;
-  }
-  const participants = participantKey.map((element, index) => {
+  // if (screenPresenter) {
+  //   gridCol = 1;
+  //   gridRowSize = 2;
+  // }
+   
+    const participants = participantKey.map((element, index) => {
     const currentParticipant = props.participants[element];
     const isCurrentUser = currentParticipant.currentUser;
     if (isCurrentUser) {
@@ -54,28 +57,29 @@ const Participants = (props) => {
         if (videElement) videElement.srcObject = remoteStream;
       };
     }
-
     return (
       <Participant
         key={curentIndex}
         currentParticipant={currentParticipant}
         curentIndex={curentIndex}
         hideVideo={screenPresenter && screenPresenter !== element}
-        showAvatar={
+        showAvatar=
+        {
           !currentParticipant.video &&
           !currentParticipant.screen &&
           currentParticipant.name
         }
+        NotInstructer={false}
       />
     );
   });
   return (
     <div
-      style={{
-        "--grid-size": gridCol,
-        "--grid-col-size": gridColSize,
-        "--grid-row-size": gridRowSize,
-      }}
+      // style={{
+      //   "--grid-size": gridCol,
+      //   "--grid-col-size": gridColSize,
+      //   "--grid-row-size": gridRowSize,
+      // }}
       className={`participants`}
     >
       {participants}
@@ -86,6 +90,7 @@ const Participants = (props) => {
         videoRef={videoRef}
         showAvatar={currentUser && !currentUser.video && !currentUser.screen}
         currentUser={true}
+        NotInstructer={true}
       />
     </div>
   );
