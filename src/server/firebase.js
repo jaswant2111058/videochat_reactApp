@@ -1,5 +1,5 @@
 import firebase from "firebase";
-
+import { useEffect } from "react";
 var firebaseConfig = {
   apiKey: "375347784333", // Add API Key
   databaseURL:"https://chatvideo-31e36-default-rtdb.firebaseio.com/" // Add databaseURL
@@ -11,36 +11,14 @@ export const db = firebase;
 
 var firepadRef = firebase.database().ref();
 
-var user = JSON.parse(localStorage.getItem('videoChat'))
-console.log(user)
-  const userState=(index)=>{
-      if(user&&index)
-      {
-        return user.roomId
-      }
-      else if (user&&!index)
+const user = JSON.parse(localStorage.getItem('videoChat'))
 
-      {
-        return user.userName
-      } 
-      else 
-      return 0
-  }
-export const userName = userState(0);
+export const userName = user?user.userName:"Refresh Again";
 // login id and password adding
 
 const urlparams = new URLSearchParams(window.location.search);
 
-const roomId = userState(1)||urlparams.get("id")
-
-if(user)
-{
-user={
-  userName,roomId
-}
-localStorage.setItem('videoChat',JSON.stringify(user))
-}
-
+const roomId = user?user.roomId:urlparams.get("id")
 
 if (roomId) {
   firepadRef = firepadRef.child(roomId);

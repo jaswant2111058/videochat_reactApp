@@ -1,6 +1,6 @@
 import MainScreen from "./components/MainScreen/MainScreen.component";
 import { BrowserRouter,HashRouter, Routes, Route} from "react-router-dom";
-import firepadRef, { db, userName } from "./server/firebase";
+import firepadRef, {userName,db} from "./server/firebase";
 import "./App.css";
 import { useEffect, useState } from "react";
 import {
@@ -20,6 +20,7 @@ import OTP from "./components/SignUp/otpVerification"
 
 
 function App(props) {
+ 
   const getUserStream = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -31,7 +32,7 @@ function App(props) {
   useEffect(async () => {
     const stream = await getUserStream();
     stream.getVideoTracks()[0].enabled = false;
-    props.setMainStream(stream);
+    props.setMainStream(stream); 
 
     connectedRef.on("value", (snap) => {
       if (snap.val()) {
@@ -89,12 +90,12 @@ function App(props) {
 
     <HashRouter>
     <Routes>
-      <Route  path ='/' element={<div className="App">
+      <Route  path ='/video' element={<div className="App">
       <MainScreen />
     </div>
   }/>
-      <Route  path ='/joinroom' element={<JoinRoom />}/>
-      <Route  path ='/createroom' element={<CreateRoom />}/>
+      <Route  path ='/joinroom' element={<JoinRoom  />}/>
+      <Route  path ='/' element={<CreateRoom/>}/>
       <Route exact path ="/signup" element={<SignUp setEmail={setEmail} />}/>
       <Route exact path='/otpverify' element={<OTP email={email}/>}/>
       <Route exact path ='/signin' element={<SignIn/>}/>

@@ -10,8 +10,8 @@ import { useNavigate, Link } from "react-router-dom";
 
 const MainScreen = (props) => {
   const navigate = useNavigate()
-  const user =  JSON.parse(localStorage.getItem('videoChat'))
-  if(!user) navigate('/createroom')
+  // const user =  JSON.parse(localStorage.getItem('videoChat'))
+  // if(!user) navigate('/createroom')
   const participantRef = useRef(props.participants);
 
   const onMicClick = (micEnabled) => {

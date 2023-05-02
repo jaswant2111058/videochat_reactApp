@@ -15,8 +15,9 @@ export const Participant = (props) => {
     currentUser,
     NotInstructer,
   } = props;
+  const userName = currentParticipant?currentParticipant.name.slice(0,currentParticipant.name.length-1):"refresh again"
   if (!currentParticipant) return <></>;
-  if(!NotInstructer)
+  if(currentParticipant.name[currentParticipant.name.length-1]==='$')
   {
   return (
     <>
@@ -51,7 +52,7 @@ export const Participant = (props) => {
       </Card>
       <div className="nameWrap">
       <div className="name">
-          {currentParticipant.name}
+          {userName}
           {currentUser ? "(You)" : ""}
         </div>
         </div>
@@ -63,6 +64,7 @@ export const Participant = (props) => {
         else{
           return (
             <>
+            <div className="listenerwraper">
             <div className="listener">
               <CardListener>
                 <video
@@ -91,8 +93,9 @@ export const Participant = (props) => {
                 )}
               </CardListener>
               <div className="nameListener">
-                  {currentParticipant.name}
+                  {userName}
                 </div>
+            </div>
             </div>
             </>
           )

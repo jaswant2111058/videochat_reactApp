@@ -2,26 +2,19 @@ import React, { useState,useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./JoinRoom.css";
 
-const SignIn = () => {
-  const navigate = useNavigate()
+const JoinRoom = () => {
 
-  const [user, setUser] = useState({
-    userName: "",
-    roomId: "",
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
-  //setEmail('123@abc')
+  const navigate = useNavigate()
   const handleClick = async () => {
 
+    const userName = document.getElementById('userName').value
+       
+        const user = {
+          userName:userName+"#",
+          roomId:document.getElementById('roomId').value
+        }
         localStorage.setItem('videoChat',JSON.stringify(user))
-        navigate('/')
-      
+        navigate('/video')
   };
   return (
     <>
@@ -29,25 +22,23 @@ const SignIn = () => {
         <span>
           <h1>Sign In</h1>
           <input
+            id="userName"
             placeholder="Name"
             name="userName"
             type={"text"}
-            value={user.userName}
-            onChange={handleChange}
           />
           <input
+            id="roomId"
             placeholder="Room Id"
             name="roomId"
             type={"text"}
-            value={user.roomId}
-            onChange={handleChange}
           />
           <button onClick={handleClick}>Join</button>
-        <span className="footerLogin"> Create A New Room<Link to='/createroom'>New Room</Link></span>
+        <span className="footerLogin"> Create A New Room<Link to='/creatroom'>New Room</Link></span>
         </span>
       </div>
     </>
   );
 };
 
-export default SignIn;
+export default JoinRoom;

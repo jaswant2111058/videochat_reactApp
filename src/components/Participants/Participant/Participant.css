@@ -111,3 +111,7 @@
     text-align: center;
     
   }
+  .listenerwraper{
+    display: flex;
+    justify-content: center;
+  }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Await} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
@@ -15,10 +16,11 @@ import { useNavigate, Link } from "react-router-dom";
 
 
 
-const MeetingFooter = (props) => {
+const MeetingFooter =  (props) => {
   const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem('videoChat'))
 
+  const urlparams = new URLSearchParams(window.location.search);
+  const roomId = urlparams.get("id")
   const [streamState, setStreamState] = useState({
     mic: true,
     video: false,
@@ -70,7 +72,7 @@ const MeetingFooter = (props) => {
     
     <div className="meeting-footer">
       <div className="roomid">
-      {`Room Id : ${user?user.roomId:''}`}
+      {`Room Id :  ${roomId}`}
       </div>
       <div
         className={"meeting-icons " + (!streamState.mic ? "active" : "")}
