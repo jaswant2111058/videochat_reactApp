@@ -13,7 +13,6 @@ export const Participant = (props) => {
     videoRef,
     showAvatar,
     currentUser,
-    NotInstructer,
   } = props;
   const userName = currentParticipant?currentParticipant.name.slice(0,currentParticipant.name.length-1):"refresh again"
   if (!currentParticipant) return <></>;
@@ -87,7 +86,6 @@ export const Participant = (props) => {
                     className="avatarListener"
                   >
                     {currentParticipant.name[0]}
-                    
                   </div>
                   
                 )}
@@ -100,5 +98,6 @@ export const Participant = (props) => {
             </>
           )
         }
+       
     
 };

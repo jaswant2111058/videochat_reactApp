@@ -5,6 +5,7 @@ import "./JoinRoom.css";
 const JoinRoom = () => {
 
   const navigate = useNavigate()
+  localStorage.removeItem('videoChat')
   const handleClick = async () => {
 
     const userName = document.getElementById('userName').value

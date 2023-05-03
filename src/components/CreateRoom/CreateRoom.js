@@ -4,6 +4,7 @@ import "./CreateRoom.css";
 
 const CreateRoom = () => {
     const navigate = useNavigate()
+    localStorage.removeItem('videoChat')
   //setEmail('123@abc')
   const handleClick = () => {
         const userName = document.getElementById('userName').value

@@ -14,7 +14,7 @@
 
   .participant {
     background-color: #353b48;
-    height: 50%;
+    height: 40%;
     width: 80%;
     border-radius: 5px;
     min-height: 200px
@@ -83,6 +83,7 @@
     position: relative;
     object-fit: cover;
     border-radius: 50px;
+    display: inline-block;
   }
   .avatarListener {
 
@@ -112,6 +113,6 @@
     
   }
   .listenerwraper{
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    margin-left: 20px;
   }

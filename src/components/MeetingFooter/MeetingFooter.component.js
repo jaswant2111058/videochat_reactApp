@@ -50,7 +50,7 @@ const MeetingFooter =  (props) => {
 
   const onHangupClick = () => {
    localStorage.removeItem('videoChat')
-   navigate('/createroom')
+   navigate('/')
   };
 
   const setScreenState = (isEnabled) => {
